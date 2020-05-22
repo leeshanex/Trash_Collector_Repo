@@ -47,7 +47,15 @@
            
             <div class="form-group">
                 <label asp-for="DayOfWeekPickUp" class="control-label"></label>
-                <input asp-for="DayOfWeekPickUp" class="form-control" />
+               
+                <select name = "DayOfWeekPickUp" id="DayOfWeekPickUp" class="form-control">
+                <option value=""></option>
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wednesday</option>
+                <option value="thursday">Thursday</option>
+                <option value="friday">Friday</option></select>
+               
                 <span asp-validation-for="DayOfWeekPickUp" class="text-danger"></span>
             </div>
             
