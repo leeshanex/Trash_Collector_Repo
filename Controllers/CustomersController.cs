@@ -117,7 +117,7 @@ namespace TrashCollector_Proj.Controllers
                     {
                         throw;
                     }
-                }
+                }   
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
