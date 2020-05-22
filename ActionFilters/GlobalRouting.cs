@@ -34,7 +34,7 @@ namespace TrashCollector_Proj.ActionFilters
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
