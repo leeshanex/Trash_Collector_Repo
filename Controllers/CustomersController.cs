@@ -29,7 +29,7 @@ namespace TrashCollector_Proj.Controllers
         }
 
         // GET: Customers/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null)
             {
@@ -59,7 +59,7 @@ namespace TrashCollector_Proj.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,IdentityUserId")] Customer customer)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,City,State,ZipCode,AmountOwedBalance,IdentityUserId")] Customer customer)
         {
             if (ModelState.IsValid)
             {
