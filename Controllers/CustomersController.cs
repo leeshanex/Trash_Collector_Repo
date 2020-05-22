@@ -78,8 +78,8 @@ namespace TrashCollector_Proj.Controllers
             {
                 return NotFound();
             }
-
-            var customer = await _context.Customer.FindAsync(id);
+            var customer = _context.Customer.SingleOrDefault(c => c.Id == id);
+           // var customer = await _context.Customer.FindAsync(id);
             if (customer == null)
             {
                 return NotFound();
@@ -93,7 +93,7 @@ namespace TrashCollector_Proj.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IdentityUserId")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,City,State,ZipCode,AmountOwedBalance,IdentityUserId")] Customer customer)
         {
             if (id != customer.Id)
             {

@@ -63,6 +63,10 @@
                 <input asp-for="IdentityUserId" class="form-control" />
                 <span asp-validation-for="IdentityUserId" class="text-danger"></span>
             </div>
+            @Html.HiddenFor(model => model.Id);
+            @Html.HiddenFor(model => model.AmountOwedBalance);
+            @Html.HiddenFor(model => model.IdentityUserId);
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
