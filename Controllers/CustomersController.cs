@@ -104,6 +104,14 @@ namespace TrashCollector_Proj.Controllers
             {
                 try
                 {
+                    var customerInDB = _context.Customers.Single(c => c.Id == customer.Id);
+                    customerInDB.FirstName = customer.FirstName;
+                    customerInDB.LastName = customer.LastName;
+                    customerInDB.City = customer.City;
+                    customerInDB.State = customer.State;
+                    customerInDB.ZipCode = customer.ZipCode;
+                    customerInDB.DayOfWeekPickUp = customer.DayOfWeekPickUp;
+                    
                     _context.Update(customer);
                     await _context.SaveChangesAsync();
                 }
@@ -118,7 +126,7 @@ namespace TrashCollector_Proj.Controllers
                         throw;
                     }
                 }   
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Customers");
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
