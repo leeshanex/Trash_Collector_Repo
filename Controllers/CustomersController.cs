@@ -93,30 +93,12 @@ namespace TrashCollector_Proj.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
                     var customerInDB = _context.Customer.Single(c => c.Id == customer.Id);
-                    customerInDB.FirstName = customer.FirstName;
-                    customerInDB.LastName = customer.LastName;
-                    customerInDB.City = customer.City;
-                    customerInDB.State = customer.State;
-                    customerInDB.ZipCode = customer.ZipCode;
                     customerInDB.DayOfWeekPickUp = customer.DayOfWeekPickUp;
                     
-                    _context.Update(customer);
+                    _context.Update(customerInDB);
                     _context.SaveChanges();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CustomerExists(customer.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }   
+            
                 return RedirectToAction("Index", "Customers");
             }
             return View(customer);
