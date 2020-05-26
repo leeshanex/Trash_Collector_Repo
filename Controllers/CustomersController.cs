@@ -38,7 +38,8 @@ namespace TrashCollector_Proj.Controllers
             {
                 return NotFound();
             }
-
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInCustomer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             var customer = await _context.Customers
                 .Include(c => c.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -47,14 +48,16 @@ namespace TrashCollector_Proj.Controllers
                 return NotFound();
             }
 
-            return View(customer);
+            return View(loggedInCustomer);
         }
 
         // GET: Customers/Create
         public ActionResult Create()
         {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInCustomer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "FirstName");
-            return View();
+            return View(loggedInCustomer);
         }
 
         // POST: Customers/Create
@@ -66,6 +69,8 @@ namespace TrashCollector_Proj.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier); 
+                var customerCreate = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
                 _context.Customers.Add(customer);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -75,20 +80,21 @@ namespace TrashCollector_Proj.Controllers
         }
 
         // GET: Customers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            //var customer = _context.Customer.SingleOrDefault(c => c.Id == id);
-            var customer = await _context.Customers.FindAsync(id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "FirstName", customer.IdentityUserId);
-            return View(customer);
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInCustomer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            //var customer = await _context.Customers.FindAsync(id);
+            //if (customer == null)
+            //{
+            //    return NotFound();
+            //}
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", loggedInCustomer.IdentityUserId);
+            return View(loggedInCustomer);
         }
 
         // POST: Customers/Edit/5
