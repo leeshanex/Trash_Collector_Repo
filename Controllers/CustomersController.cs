@@ -26,7 +26,7 @@ namespace TrashCollector_Proj.Controllers
         public ActionResult Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var loggedInCustomer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            var loggedInCustomer = _context.Customer.Where(c => c.IdentityUserId == userId).SingleOrDefault();
 
             return View(loggedInCustomer);
         }
@@ -39,8 +39,8 @@ namespace TrashCollector_Proj.Controllers
                 return NotFound();
             }
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var loggedInCustomer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            var customer = await _context.Customers
+            var loggedInCustomer = _context.Customer.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            var customer = await _context.Customer
                 .Include(c => c.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
@@ -55,7 +55,7 @@ namespace TrashCollector_Proj.Controllers
         public ActionResult Create()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var loggedInCustomer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            var loggedInCustomer = _context.Customer.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "FirstName");
             return View(loggedInCustomer);
         }
@@ -70,8 +70,8 @@ namespace TrashCollector_Proj.Controllers
             if (ModelState.IsValid)
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier); 
-                var customerCreate = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-                _context.Customers.Add(customer);
+                var customerCreate = _context.Customer.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+                _context.Customer.Add(customer);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -80,21 +80,21 @@ namespace TrashCollector_Proj.Controllers
         }
 
         // GET: Customers/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            //if (id == null)
-            //{
-            //    return NotFound();
-            //}
+            if (id == null)
+            {
+                return NotFound();
+            }
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var loggedInCustomer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            //var customer = await _context.Customers.FindAsync(id);
-            //if (customer == null)
-            //{
-            //    return NotFound();
-            //}
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", loggedInCustomer.IdentityUserId);
-            return View(loggedInCustomer);
+            var loggedInCustomer = _context.Customer.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            var customer = await _context.Customer.FindAsync(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            return View(customer);
         }
 
         // POST: Customers/Edit/5
@@ -113,7 +113,7 @@ namespace TrashCollector_Proj.Controllers
             {
                 try
                 {
-                    var customerInDB = _context.Customers.Single(c => c.Id == customer.Id);
+                    var customerInDB = _context.Customer.Single(c => c.Id == customer.Id);
                     customerInDB.FirstName = customer.FirstName;
                     customerInDB.LastName = customer.LastName;
                     customerInDB.City = customer.City;
@@ -149,7 +149,7 @@ namespace TrashCollector_Proj.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers
+            var customer = await _context.Customer
                 .Include(c => c.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
@@ -165,15 +165,15 @@ namespace TrashCollector_Proj.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var customer = await _context.Customers.FindAsync(id);
-            _context.Customers.Remove(customer);
+            var customer = await _context.Customer.FindAsync(id);
+            _context.Customer.Remove(customer);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CustomerExists(int id)
         {
-            return _context.Customers.Any(e => e.Id == id);
+            return _context.Customer.Any(e => e.Id == id);
         }
     }
 }
