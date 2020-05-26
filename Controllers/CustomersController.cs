@@ -96,7 +96,7 @@ namespace TrashCollector_Proj.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Customer customer)
+        public ActionResult Edit(int id, Customer customer)
         {
             if (id != customer.Id)
             {
@@ -116,7 +116,7 @@ namespace TrashCollector_Proj.Controllers
                     customerInDB.DayOfWeekPickUp = customer.DayOfWeekPickUp;
                     
                     _context.Update(customer);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -131,7 +131,7 @@ namespace TrashCollector_Proj.Controllers
                 }   
                 return RedirectToAction("Index", "Customers");
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "FirstName", customer.IdentityUserId);
             return View(customer);
         }
 
