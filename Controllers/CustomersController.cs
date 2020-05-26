@@ -73,7 +73,7 @@ namespace TrashCollector_Proj.Controllers
                 var customerCreate = _context.Customer.Where(c => c.IdentityUserId == userId).SingleOrDefault();
                 _context.Customer.Add(customer);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details");
             }
             ViewBag.IdentityUserId = new SelectList(_context.Users, "Id", "FirstName", customer.IdentityUserId);
             return View(customer);
