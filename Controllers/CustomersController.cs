@@ -39,7 +39,7 @@ namespace TrashCollector_Proj.Controllers
             var loggedInCustomer = _context.Customer.Where(c => c.IdentityUserId == userId).SingleOrDefault();
          
             if (loggedInCustomer == null)
-            {
+            { 
                 return NotFound();
             }
 
