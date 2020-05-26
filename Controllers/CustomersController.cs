@@ -23,7 +23,7 @@ namespace TrashCollector_Proj.Controllers
         }
 
         // GET: Customers
-        public async Task<IActionResult> Index()
+        public ActionResult Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var loggedInCustomer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
@@ -51,7 +51,7 @@ namespace TrashCollector_Proj.Controllers
         }
 
         // GET: Customers/Create
-        public IActionResult Create()
+        public ActionResult Create()
         {
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "FirstName");
             return View();
@@ -87,7 +87,7 @@ namespace TrashCollector_Proj.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "FirstName", customer.IdentityUserId);
             return View(customer);
         }
 
