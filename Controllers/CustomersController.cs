@@ -95,7 +95,6 @@ namespace TrashCollector_Proj.Controllers
             {
                     var customerInDB = _context.Customer.Single(c => c.Id == customer.Id);
                     customerInDB.DayOfWeekPickUp = customer.DayOfWeekPickUp;
-                    
                     _context.Update(customerInDB);
                     _context.SaveChanges();
             
