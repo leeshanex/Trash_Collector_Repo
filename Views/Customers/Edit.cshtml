@@ -13,56 +13,20 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="State" class="control-label"></label>
-                <input asp-for="State" class="form-control" />
-                <span asp-validation-for="State" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ZipCode" class="control-label"></label>
-                <input asp-for="ZipCode" class="form-control" />
-                <span asp-validation-for="ZipCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AmountOwedBalance" class="control-label"></label>
-                <input asp-for="AmountOwedBalance" class="form-control" />
-                <span asp-validation-for="AmountOwedBalance" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="DayOfWeekPickUp" class="control-label"></label>
-                <input asp-for="DayOfWeekPickUp" class="form-control" />
+                <select name="DayOfWeekPickUp" id="DayOfWeekPickUp" class="form-control">
+                    <option value=""></option>
+                    <option value="monday">Monday</option>
+                    <option value="tuesday">Tuesday</option>
+                    <option value="wednesday">Wednesday</option>
+                    <option value="thursday">Thursday</option>
+                    <option value="friday">Friday</option>
+                </select>
                 <span asp-validation-for="DayOfWeekPickUp" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdentityUserId" class="control-label"></label>
-                <input asp-for="IdentityUserId" class="form-control" />
-                <span asp-validation-for="IdentityUserId" class="text-danger"></span>
-            </div>
+
             @Html.HiddenFor(model => model.Id);
             @Html.HiddenFor(model => model.AmountOwedBalance);
             @Html.HiddenFor(model => model.IdentityUserId);

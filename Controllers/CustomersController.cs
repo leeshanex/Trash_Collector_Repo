@@ -32,18 +32,13 @@ namespace TrashCollector_Proj.Controllers
         }
 
         // GET: Customers/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public ActionResult Details()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+         
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var loggedInCustomer = _context.Customer.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            var customer = await _context.Customer
-                .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
+         
+            if (loggedInCustomer == null)
             {
                 return NotFound();
             }
@@ -56,7 +51,7 @@ namespace TrashCollector_Proj.Controllers
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var loggedInCustomer = _context.Customer.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "FirstName");
+        
             return View(loggedInCustomer);
         }
 
@@ -69,32 +64,24 @@ namespace TrashCollector_Proj.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier); 
-                var customerCreate = _context.Customer.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                customer.IdentityUserId = userId;
                 _context.Customer.Add(customer);
                 _context.SaveChanges();
                 return RedirectToAction("Details");
             }
-            ViewBag.IdentityUserId = new SelectList(_context.Users, "Id", "FirstName", customer.IdentityUserId);
+           
             return View(customer);
         }
 
         // GET: Customers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public  ActionResult Edit()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+          
             var loggedInCustomer = _context.Customer.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            var customer = await _context.Customer.FindAsync(id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
-            return View(customer);
+         
+            return View(loggedInCustomer);
         }
 
         // POST: Customers/Edit/5
@@ -102,13 +89,8 @@ namespace TrashCollector_Proj.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Customer customer)
+        public ActionResult Edit(Customer customer)
         {
-            if (id != customer.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
@@ -137,7 +119,6 @@ namespace TrashCollector_Proj.Controllers
                 }   
                 return RedirectToAction("Index", "Customers");
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "FirstName", customer.IdentityUserId);
             return View(customer);
         }
 
