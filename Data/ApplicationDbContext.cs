@@ -43,6 +43,6 @@ namespace TrashCollector_Proj.Data
                         NormalizedName = "EMPLOYEE"
                     });
         }
-        public DbSet<TrashCollector_Proj.Models.Customer> Customer { get; set; }
+        //public DbSet<TrashCollector_Proj.Models.Customer> Customer { get; set; }
     }
 }
