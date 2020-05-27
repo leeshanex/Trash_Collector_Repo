@@ -1,16 +1,21 @@
-﻿@model TrashCollector_Proj.Models.Customer
+﻿@model IEnumerable<TrashCollector_Proj.Models.Employee>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Today's Pickup</h1>
+<h1>Profile</h1>
 
-<table class="table-bordered">
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
     <thead>
         <tr>
-
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
@@ -29,24 +34,18 @@
             <th>
                 @Html.DisplayNameFor(model => model.ZipCode)
             </th>
- 
             <th>
-                @Html.DisplayNameFor(model => model.DayOfWeekPickUp)
+                @Html.DisplayNameFor(model => model.IdentityUserId)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OneTimePickupDay)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SuspendPickupDates)
-            </th>
-
             <th></th>
         </tr>
     </thead>
-    @*<tbody>
+    <tbody>
 @foreach (var item in Model) {
         <tr>
-           
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
@@ -65,17 +64,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ZipCode)
             </td>
-            
             <td>
-                @Html.DisplayFor(modelItem => item.DayOfWeekPickUp)
+                @Html.DisplayFor(modelItem => item.IdentityUserId)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OneTimePickupDay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SuspendPickupDates)
-            </td>
-           
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
@@ -83,8 +74,5 @@
             </td>
         </tr>
 }
-    </tbody>*@
+    </tbody>
 </table>
-<div>
-    <a asp-action="Index">Back to Profile</a>
-</div>
