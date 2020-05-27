@@ -44,9 +44,11 @@ namespace TrashCollector_Proj.Controllers
         }
 
         // GET: Employees/Create
-        public IActionResult Create()
+        public ActionResult Create()
         {
-            return View();
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            return View(loggedInEmployee);
         }
 
         // POST: Employees/Create
