@@ -8,6 +8,8 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\20200527162236_CorrectDataTypeForPickupsAndSuspend.cs" />
     <Compile Remove="Data\Migrations\20200527162236_CorrectDataTypeForPickupsAndSuspend.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200527163334_UpdatePropetiesDataType.cs" />
+    <Compile Remove="Data\Migrations\20200527163334_UpdatePropetiesDataType.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
