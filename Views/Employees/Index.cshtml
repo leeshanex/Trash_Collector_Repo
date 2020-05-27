@@ -9,46 +9,77 @@
 <div>
     <h4>Customers</h4>
     <hr />
+</div>
+<div>
+        <table class="table-bordered">
+            <thead>
+                <tr>
 
-    <table class="table-bordered">
-        <thead>
-            <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.City)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.State)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ZipCode)
+                    </th>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Address)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.City)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.State)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ZipCode)
-                </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DayOfWeekPickUp)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OneTimePickupDay)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SuspendPickupDates)
+                    </th>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.DayOfWeekPickUp)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OneTimePickupDay)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SuspendPickupDates)
-                </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.ZipCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.DayOfWeekPickUp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.OneTimePickupDay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.SuspendPickupDates)
+                    </td>
 
-                <th></th>
-            </tr>
-        </thead>
-        
-
-    </table>
+                </tr>
+            </tbody>
+        </table>
 </div>
 <div>
     <a asp-action="Details">View Profile</a> |
