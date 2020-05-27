@@ -66,7 +66,7 @@ namespace TrashCollector_Proj.Controllers
                 employee.IdentityUserId = userId;
                 _context.Employees.Add(employee);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details");
             }
             return View(employee);
         }
