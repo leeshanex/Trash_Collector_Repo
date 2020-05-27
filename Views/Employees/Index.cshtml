@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TrashCollector_Proj.Models.Employee>
+﻿@model TrashCollector_Proj.Models.Employee
 
 @{
     ViewData["Title"] = "Index";
@@ -6,10 +6,11 @@
 }
 
 <h1>Employee Profile</h1>
-
-<p>
-    <a asp-action="Create">Create Profile</a>
-</p>
+<div>
+    <p>
+        <a asp-action="Create">Create Profile</a>
+    </p>
+</div>
 <table class="table-bordered">
     <thead>
         <tr>
@@ -36,4 +37,29 @@
             <th></th>
         </tr>
     </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.City)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.State)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.ZipCode)
+            </td>
+        </tr>
+    </tbody>
 </table>
+<div> 
+    <a asp-action="Index">Back to list</a>
+</div>
