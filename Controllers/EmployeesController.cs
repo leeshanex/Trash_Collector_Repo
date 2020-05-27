@@ -23,18 +23,23 @@ namespace TrashCollector_Proj.Controllers
         }
 
         // GET: Employees
-        public ActionResult Index(Customer customer)
+        public ActionResult Index(Employee employee)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var loggedInEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
-            
+
+            //if (ModelState.IsValid)
+            //{
+            //    employee.IdentityUserId = userId;
+            //    return RedirectToAction("Default");
+            //}
 
             //if (loggedInEmployee.Id > 0)
             //{
             //    var todaysPickUp = loggedInEmployee.ZipCode.Contains(customer.ZipCode);
             //}
 
-            return View(loggedInEmployee);
+            return View("Default");
         }
 
         // GET: Employees/Details/5
