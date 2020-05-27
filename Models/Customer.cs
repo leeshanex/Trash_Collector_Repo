@@ -20,6 +20,9 @@ namespace TrashCollector_Proj.Models
         public string ZipCode { get; set; }
         public int AmountOwedBalance { get; set; }
         public string DayOfWeekPickUp { get; set; }
+        public string OneTimePickupDay { get; set; }
+        public string SuspendPickupDates { get; set; }
+
 
 
         [ForeignKey("IdentityUser")]
