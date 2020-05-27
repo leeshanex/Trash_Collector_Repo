@@ -6,14 +6,15 @@
 }
 
 <h1>Index</h1>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <div>
     <h4>Customer</h4>
     <hr />
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
     <dl class="table-bordered">
-      
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
@@ -54,7 +55,7 @@
             @Html.DisplayNameFor(model => model.AmountOwedBalance)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AmountOwedBalance)   
+            @Html.DisplayFor(model => model.AmountOwedBalance)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DayOfWeekPickUp)
@@ -62,7 +63,7 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DayOfWeekPickUp)
         </dd>
-       
+
     </dl>
 </div>
 

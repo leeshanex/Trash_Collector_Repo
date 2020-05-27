@@ -5,17 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Employee Profile</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create Profile</a>
 </p>
-<table class="table">
+<table class="table-bordered">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
@@ -34,14 +32,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.ZipCode)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdentityUserId)
-            </th>
+           
             <th></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
+    @*<tbody>*@
+@*@foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
@@ -74,5 +70,5 @@
             </td>
         </tr>
 }
-    </tbody>
+    </tbody>*@
 </table>
