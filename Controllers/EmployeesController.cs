@@ -23,14 +23,15 @@ namespace TrashCollector_Proj.Controllers
         }
 
         // GET: Employees
-        public ActionResult Index()
+        public ActionResult Index(Customer customer)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var loggedInEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            
 
-            //if(loggedInEmployee.Id > 0) ~~~ I want to remove "create" when an employee has already created a profile
+            //if (loggedInEmployee.Id > 0)
             //{
-                
+            //    var todaysPickUp = loggedInEmployee.ZipCode.Contains(customer.ZipCode);
             //}
 
             return View(loggedInEmployee);

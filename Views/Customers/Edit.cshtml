@@ -27,21 +27,24 @@
                 <span asp-validation-for="DayOfWeekPickUp" class="text-danger"></span>
             </div>
             @*One-time pickup*@
-            <div>
-                <label for="OneTimePickupDay" class="text-dark">Request an extra, One-time pickup:</label>
+            <div class="form-group">
+                <label for="OneTimePickupDay" class="font-weight-bolder">Request an extra, One-time pickup:</label>
                 <input type="date" id="OneTimePickupDay" name="One-time Pickup"
                        value=" "
                        min="" max="" />
             </div>
             @*Start and end Suspend pickup*@
-        <div>
-            <div>
-                <label for="SuspendPickupDates" class="text-dark">Temporarily Suspend pickups:</label>
-                <input type="date" id="SuspendPickupDates" name="Suspend Pickup"
-                       value=" "
-                       min="" max="" />
+        
+            <div class="form-group">
+                <label for="SuspendPickupDates" class="font-weight-bolder">Temporarily Suspend pickups</label>
+                <label for="start" class="font-weight-bold">Start:</label>
+                <input type="date" id="start" name="Suspend Pickup Start"
+                       value=" " min="" max="" />
+                <label for="end" class="font-weight-bold">End:</label>
+                <input type="date" id="end" name="Suspend Pickup End"
+                       value=" " min="" max="" />
             </div>
-        </div>
+        
             @Html.HiddenFor(model => model.Id)
             @Html.HiddenFor(model => model.AmountOwedBalance)
             @Html.HiddenFor(model => model.IdentityUserId)
