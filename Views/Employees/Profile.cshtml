@@ -6,35 +6,58 @@
 }
 
 <h1>Profile</h1>
-
+<hr />
 <p>
     <a asp-action="Create">Create Profile</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
 
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.State)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ZipCode)
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ZipCode)
+                </th>
 
-            <th></th>
-        </tr>
-    </thead>
-
-</table>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.State)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.ZipCode)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

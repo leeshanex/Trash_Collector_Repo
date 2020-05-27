@@ -50,7 +50,7 @@ namespace TrashCollector_Proj.Controllers
             var loggedInEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
             
 
-            return View(loggedInEmployee);
+            return View("Profile");
         }
 
         // GET: Employees/Create
