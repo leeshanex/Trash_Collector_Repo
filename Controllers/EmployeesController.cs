@@ -23,7 +23,7 @@ namespace TrashCollector_Proj.Controllers
         }
 
         // GET: Employees
-        public ActionResult Index(Employee employee)
+        public ActionResult Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var loggedInEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
@@ -39,7 +39,7 @@ namespace TrashCollector_Proj.Controllers
             //    var todaysPickUp = loggedInEmployee.ZipCode.Contains(customer.ZipCode);
             //}
 
-            return View("Default");
+            return View(loggedInEmployee);
         }
 
         // GET: Employees/Details/5
