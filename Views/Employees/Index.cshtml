@@ -37,12 +37,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.DayOfWeekPickUp)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.OneTimePickupDay)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SuspendPickupDates)
-                    </th>
+
 
                     <th></th>
                 </tr>
@@ -129,5 +124,6 @@
     </dl>*@
 </div>
 <div>
+    <a asp-action="FilterView">View Filtered List</a> |
     <a asp-action="Details">View Profile</a> |
 </div>

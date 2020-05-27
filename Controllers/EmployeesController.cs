@@ -27,19 +27,8 @@ namespace TrashCollector_Proj.Controllers
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var loggedInEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
-
-            //if (ModelState.IsValid)
-            //{
-            //    employee.IdentityUserId = userId;
-            //    return RedirectToAction("Default");
-            //}
-
-            //if (loggedInEmployee.Id > 0)
-            //{
-            //    var todaysPickUp = _context.Customers.Where(c => c.ZIp == loggedinemployee.zip && c. pickupday == today) ;
-            //}
-            //return View(todayspickups);
-            return View(loggedInEmployee);
+            
+            return View();
         }
 
         // GET: Employees/Details/5
@@ -50,7 +39,7 @@ namespace TrashCollector_Proj.Controllers
             var loggedInEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
             
 
-            return View(loggedInEmployee);
+            return View("Details");
         }
         public ActionResult Profile()
         {
@@ -61,13 +50,20 @@ namespace TrashCollector_Proj.Controllers
         }
         public ActionResult FilterView(string dayOfWeek)//parameter that gets passed in will be the day of week
         {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+
+
+            var todaysPickUp = _context.Customer.Where(c => c.ZipCode == loggedInEmployee.ZipCode && c.DayOfWeekPickUp == dayOfWeek);
+
+            //return View(todayspickups);
             //use parameter to query DB and only find pickups for that certain day
             //var filteredPickUps =
 
             //return View(filteredPickUps);
             //Also add view for this method
             //Add links to trigger this method with each different day of the week
-            return View();
+            return View(todaysPickUp);
         }
 
         // GET: Employees/Create
