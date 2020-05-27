@@ -56,7 +56,7 @@ namespace TrashCollector_Proj.Controllers
 
             var todaysPickUp = _context.Customer.Where(c => c.ZipCode == loggedInEmployee.ZipCode && c.DayOfWeekPickUp == dayOfWeek);
 
-            //return View(todayspickups);
+            //return View(todayspickups);actiona
             //use parameter to query DB and only find pickups for that certain day
             //var filteredPickUps =
 
