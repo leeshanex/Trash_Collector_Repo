@@ -39,7 +39,7 @@ namespace TrashCollector_Proj.Controllers
             //    var todaysPickUp = loggedInEmployee.ZipCode.Contains(customer.ZipCode);
             //}
 
-            return View(loggedInEmployee);
+            return View("Index");
         }
 
         // GET: Employees/Details/5
