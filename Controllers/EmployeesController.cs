@@ -29,7 +29,6 @@ namespace TrashCollector_Proj.Controllers
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var loggedInEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
-            
             return View();
         }
 
@@ -61,7 +60,17 @@ namespace TrashCollector_Proj.Controllers
             
             return View(filteredPickUps);
         }
-       
+        public ActionResult FilterViewTest(string dayOfWeek)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+
+            DayOfWeek today = DateTime.Today.DayOfWeek;
+            dayOfWeek = today.ToString();
+            var filteredPickUps = _context.Customer.Where(c => c.ZipCode == loggedInEmployee.ZipCode && c.DayOfWeekPickUp == dayOfWeek);
+
+            return View(filteredPickUps);
+        }
 
         // GET: Employees/Create
         public ActionResult Create()
@@ -106,9 +115,12 @@ namespace TrashCollector_Proj.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Employee employee)
         {
+            Customer customer = new Customer();
             if (ModelState.IsValid)
             {
-             
+                var chargeCustomer = customer.AmountOwedBalance;
+                _context.Update(chargeCustomer);
+                _context.SaveChanges();
             }
             
             return View();
