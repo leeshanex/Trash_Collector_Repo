@@ -40,33 +40,27 @@ namespace TrashCollector_Proj.Controllers
             var loggedInEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
             
 
-            return View("Details");
+            return View(loggedInEmployee);
         }
         public ActionResult Profile()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var loggedInEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
 
-            return View();
+            return View(loggedInEmployee);
         }
-        public ActionResult FilterView(string dayOfWeek)//parameter that gets passed in will be the day of week
+        public ActionResult FilterView(string dayOfWeek)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var loggedInEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
 
             DayOfWeek today = DateTime.Today.DayOfWeek;
             dayOfWeek = today.ToString();
-            var todaysPickUp = _context.Customer.Where(c => c.ZipCode == loggedInEmployee.ZipCode && c.DayOfWeekPickUp == dayOfWeek);
+            var filteredPickUps = _context.Customer.Where(c => c.ZipCode == loggedInEmployee.ZipCode && c.DayOfWeekPickUp == dayOfWeek);
 
-            //return View(todayspickups);actiona
-            //use parameter to query DB and only find pickups for that certain day
-            //var filteredPickUps =
-
-            //return View(filteredPickUps);
-            //Also add view for this method
-            //Add links to trigger this method with each different day of the week
-            return View(todaysPickUp);
+            return View(filteredPickUps);
         }
+       
 
         // GET: Employees/Create
         public ActionResult Create()
