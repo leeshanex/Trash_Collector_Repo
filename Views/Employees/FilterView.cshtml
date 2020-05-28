@@ -11,7 +11,7 @@
 <table class="table">
     <thead>
         <tr>
-          
+            <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
@@ -36,9 +36,12 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
+
         <tr>
 
+            <td><input type="checkbox" name="" id="" /></td>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
@@ -61,11 +64,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DayOfWeekPickUp)
             </td>
+            <input type="submit" value="Confirm Pickups" />
 
-            
         </tr>
-}
+
+        }
     </tbody>
+    
 </table>
 <div>
     <a asp-action="Index">Back to List</a>
