@@ -104,15 +104,11 @@ namespace TrashCollector_Proj.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Customer customer)
+        public ActionResult Edit(Employee employee)
         {
             if (ModelState.IsValid)
             {
-                var customerInDB = _context.Customer.Single(c => c.Id == customer.Id);
-                customerInDB.AmountOwedBalance = customer.AmountOwedBalance;
-                _context.Update(customerInDB);
-                _context.SaveChanges();
-                return RedirectToAction("Index", "Employees");
+             
             }
             
             return View();

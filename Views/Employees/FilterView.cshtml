@@ -34,14 +34,18 @@
 
             </tr>
         </thead>
-        <form>
+        <form asp-action="Edit">
             <tbody>
                 @foreach (var item in Model)
                 {
 
                     <tr>
 
-                        <td><input type="checkbox" name="" id="" /></td>
+                        <td>
+                        <div class="form-group">
+                            <input type="checkbox" name="" id="" />
+                            </div>
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.FirstName)
                         </td>
@@ -71,8 +75,10 @@
             </tbody>
             <tr>
                 <td>
-                    
-                    <input type="submit" value="Confirm Pickups" class="btn btn-primary" />
+
+                    <div class="form-group">
+                        <input type="submit" value="Confirm Pickups" class="btn btn-primary" />
+                    </div>
                 </td>
                 
             </tr>
