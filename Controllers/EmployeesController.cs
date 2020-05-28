@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using TrashCollector_Proj.Data;
 using TrashCollector_Proj.Models;
@@ -57,7 +58,7 @@ namespace TrashCollector_Proj.Controllers
             DayOfWeek today = DateTime.Today.DayOfWeek;
             dayOfWeek = today.ToString();
             var filteredPickUps = _context.Customer.Where(c => c.ZipCode == loggedInEmployee.ZipCode && c.DayOfWeekPickUp == dayOfWeek);
-
+            
             return View(filteredPickUps);
         }
        
@@ -89,19 +90,13 @@ namespace TrashCollector_Proj.Controllers
         }
 
         // GET: Employees/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public ActionResult Edit()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var loggedInEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
 
-            var employee = await _context.Employees.FindAsync(id);
-            if (employee == null)
-            {
-                return NotFound();
-            }
-            return View(employee);
+
+            return View(loggedInEmployee);
         }
 
         // POST: Employees/Edit/5
@@ -109,34 +104,18 @@ namespace TrashCollector_Proj.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName")] Employee employee)
+        public ActionResult Edit(Customer customer)
         {
-            if (id != employee.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(employee);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EmployeeExists(employee.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                var customerInDB = _context.Customer.Single(c => c.Id == customer.Id);
+                customerInDB.AmountOwedBalance = customer.AmountOwedBalance;
+                _context.Update(customerInDB);
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Employees");
             }
-            return View(employee);
+            
+            return View();
         }
 
         // GET: Employees/Delete/5
