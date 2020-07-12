@@ -10,7 +10,6 @@ namespace TrashCollector_Proj.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        //public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -43,6 +42,6 @@ namespace TrashCollector_Proj.Data
                         NormalizedName = "EMPLOYEE"
                     });
         }
-        public DbSet<TrashCollector_Proj.Models.Customer> Customer { get; set; }
+        public DbSet<Customer> Customers { get; set; }
     }
 }

@@ -40,8 +40,9 @@ namespace TrashCollector_Proj.Controllers
             var loggedInEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
             
 
-            return View(loggedInEmployee);
+            return View();
         }
+
         public ActionResult Profile()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -49,27 +50,16 @@ namespace TrashCollector_Proj.Controllers
 
             return View(loggedInEmployee);
         }
-        public ActionResult FilterView(string dayOfWeek)
+        public IActionResult FilterView(string dayOfWeek)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var loggedInEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
 
             DayOfWeek today = DateTime.Today.DayOfWeek;
             dayOfWeek = today.ToString();
-            var filteredPickUps = _context.Customer.Where(c => c.ZipCode == loggedInEmployee.ZipCode && c.DayOfWeekPickUp == dayOfWeek);
-            
-            return View(filteredPickUps);
-        }
-        public ActionResult FilterViewTest(string dayOfWeek)
-        {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var loggedInEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            var filteredPickUps = _context.Customers.Where(c => c.ZipCode == loggedInEmployee.ZipCode && c.DayOfWeekPickUp == dayOfWeek);
 
-            DayOfWeek today = DateTime.Today.DayOfWeek;
-            dayOfWeek = today.ToString();
-            var filteredPickUps = _context.Customer.Where(c => c.ZipCode == loggedInEmployee.ZipCode && c.DayOfWeekPickUp == dayOfWeek);
-
-            return View(filteredPickUps);
+            return View();
         }
 
         // GET: Employees/Create
@@ -118,9 +108,7 @@ namespace TrashCollector_Proj.Controllers
             Customer customer = new Customer();
             if (ModelState.IsValid)
             {
-                var chargeCustomer = customer.AmountOwedBalance;
-                _context.Update(chargeCustomer);
-                _context.SaveChanges();
+              
             }
             
             return View();

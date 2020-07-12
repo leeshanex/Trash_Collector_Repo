@@ -26,7 +26,7 @@ namespace TrashCollector_Proj.Controllers
         public ActionResult Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var loggedInCustomer = _context.Customer.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            var loggedInCustomer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
 
             return View(loggedInCustomer);
         }
@@ -36,7 +36,7 @@ namespace TrashCollector_Proj.Controllers
         {
          
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var loggedInCustomer = _context.Customer.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            var loggedInCustomer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
          
             if (loggedInCustomer == null)
             { 
@@ -50,7 +50,7 @@ namespace TrashCollector_Proj.Controllers
         public ActionResult Create()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var loggedInCustomer = _context.Customer.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            var loggedInCustomer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
         
             return View(loggedInCustomer);
         }
@@ -66,7 +66,7 @@ namespace TrashCollector_Proj.Controllers
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 customer.IdentityUserId = userId;
-                _context.Customer.Add(customer);
+                _context.Customers.Add(customer);
                 _context.SaveChanges();
                 return RedirectToAction("Details");
             }
@@ -79,7 +79,7 @@ namespace TrashCollector_Proj.Controllers
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
           
-            var loggedInCustomer = _context.Customer.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            var loggedInCustomer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
          
             return View(loggedInCustomer);
         }
@@ -93,7 +93,7 @@ namespace TrashCollector_Proj.Controllers
         {
             if (ModelState.IsValid)
             {
-                    var customerInDB = _context.Customer.Single(c => c.Id == customer.Id);
+                    var customerInDB = _context.Customers.Single(c => c.Id == customer.Id);
                     customerInDB.DayOfWeekPickUp = customer.DayOfWeekPickUp;
                     _context.Update(customerInDB);
                     _context.SaveChanges();
@@ -111,7 +111,7 @@ namespace TrashCollector_Proj.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customer
+            var customer = await _context.Customers
                 .Include(c => c.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
@@ -127,15 +127,15 @@ namespace TrashCollector_Proj.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var customer = await _context.Customer.FindAsync(id);
-            _context.Customer.Remove(customer);
+            var customer = await _context.Customers.FindAsync(id);
+            _context.Customers.Remove(customer);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CustomerExists(int id)
         {
-            return _context.Customer.Any(e => e.Id == id);
+            return _context.Customers.Any(e => e.Id == id);
         }
     }
 }
